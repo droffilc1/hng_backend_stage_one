@@ -13,6 +13,7 @@ async function getFunFact(n: number): Promise<string> {
     const response = await axios.get(`http://numbersapi.com/${n}/math`);
     return response.data;
   } catch (error) {
+    console.log(error)
     return "No fun fact available.";
   }
 }
@@ -25,7 +26,7 @@ app.get(
 
     if (isNaN(number)) {
       res.status(400).json({
-        number: rawNumber,
+        number: "alphabet",
         error: true,
       });
       return;
@@ -45,7 +46,7 @@ app.get(
       res.json(result);
     } catch (error) {
       res.status(400).json({
-        number: rawNumber,
+        number: "alphabet",
         error: true,
       });
     }
