@@ -87,7 +87,7 @@ Start the server using:
 npm run start
 ```
 
-The API should be accessible at http://localhost:2121/api/classify\-number.
+The API should be accessible at http://localhost:2121/api/classify-number.
 
 ## Technologies Used
 
