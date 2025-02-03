@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/server.js",
+      "src": "dist/server.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/classify-number",
-      "dest": "dist/server.js"
+      "dest": "/dist/server.js"
     }
   ]
 }
