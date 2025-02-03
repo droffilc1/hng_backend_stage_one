@@ -25,31 +25,30 @@ export function isPerfect(n: number): boolean {
   return sum === n;
 }
 
-// An Armstrong number is one where the sum of its own digits each raised to
-//  the power of the number of digits equals the number itself.
-export function isArmstrong(n: number): boolean {
-  const digits = n.toString().split("").map(Number);
-  const power = digits.length;
-  const sum = digits.reduce((acc, digit) => acc + Math.pow(digit, power), 0);
-  return sum === n;
-}
-
 export function digitSum(n: number): number {
   const isNegative = n < 0;
   const sum = Math.abs(n)
-    .toString()
-    .split("")
-    .reduce((sum, digit) => sum + parseInt(digit, 10), 0);
+  .toString()
+  .split("")
+  .reduce((sum, digit) => sum + parseInt(digit, 10), 0);
 
   return isNegative ? -sum : sum;
 }
 
+
+// An Armstrong number is one where the sum of its own digits each raised to
+//  the power of the number of digits equals the number itself.
+export function isArmstrong(n: number): boolean {
+  if (n < 0) return false;
+  const digits = n.toString().split("").map(Number);
+  const numDigits = digits.length;
+  const sum = digits.reduce((acc, digit) => acc + Math.pow(digit, numDigits), 0);
+  return sum === n;
+}
+
 export function getProperties(n: number): string[] {
-  const armstrong = isArmstrong(n);
-  const odd = n % 2 !== 0;
-  if (armstrong) {
-    return odd ? ["armstrong", "odd"] : ["armstrong", "even"];
-  } else {
-    return odd ? ["odd"] : ["even"];
-  }
+  const properties = [];
+  if (isArmstrong(n)) properties.push("armstrong");
+  properties.push(n % 2 === 0 ? "even" : "odd");
+  return properties;
 }
