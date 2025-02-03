@@ -35,10 +35,13 @@ export function isArmstrong(n: number): boolean {
 }
 
 export function digitSum(n: number): number {
-  return n
+  const isNegative = n < 0;
+  const sum = Math.abs(n)
     .toString()
     .split("")
     .reduce((sum, digit) => sum + parseInt(digit, 10), 0);
+
+  return isNegative ? -sum : sum;
 }
 
 export function getProperties(n: number): string[] {
