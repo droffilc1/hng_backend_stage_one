@@ -13,7 +13,7 @@ async function getFunFact(n: number): Promise<string> {
     const response = await axios.get(`http://numbersapi.com/${n}/math`);
     return response.data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return "No fun fact available.";
   }
 }
@@ -21,10 +21,20 @@ async function getFunFact(n: number): Promise<string> {
 app.get(
   "/api/classify-number",
   async (req: Request, res: Response): Promise<void> => {
-    const rawNumber = req.query.number;
-    const number = parseInt(rawNumber as string, 10);
+    const rawNumber = req.query.number as string;
 
-    if (isNaN(number)) {
+    // Convert raw input to a number
+    const number = Number(rawNumber);
+
+    // Check if the conversion yields a number,
+    // ensure it is an integer,
+    // and that the original string does not contain a decimal point or exponential notation.
+    if (
+      isNaN(number) ||
+      !Number.isInteger(number) ||
+      rawNumber.includes(".") ||
+      rawNumber.toLowerCase().includes("e")
+    ) {
       res.status(400).json({
         number: "alphabet",
         error: true,
@@ -55,6 +65,6 @@ app.get(
 
 app.listen(PORT, () => {
   console.log(`Server is listening on http://localhost:${PORT}`);
-})
+});
 
 export default app;
